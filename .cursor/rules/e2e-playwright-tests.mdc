@@ -1,0 +1,24 @@
+---
+globs: e2e/*,src/**/*
+alwaysApply: false
+---
+
+## E2E Testing with Playwright
+
+This browser extension uses Playwright for end to end tests. Playwright end to end tests can be executed by first building the code `pnpm build` and then running `pnpm e2e`.
+
+Write Page Object Models (POM) where possible to promote reuse.
+
+### Test Selector Precedence
+
+1. Wherever possible, use `data-testid` in tests: When writing code, add appropriate `data-testid` selectors to elements and reference them in e2e tests. If an appropriate testid does not exist, add it to the element. The reasoning behind this is we do not want to have to update the E2E tests when the application changes. The tests are meant to be the source of truth, and we can auto-merge and deploy without manual human regression testing if the E2E tests are not changed to accommodate a given PR.
+
+2. Only for attributes that rarely change is it preferable to locate items by their user-facing attributes. For example, the field names and labels for a Sign In form are unlikely to change, so using a role is better for something like this. For example:
+   `page.getByRole('button', { name: 'Sign In'}).click()`
+
+Here are the valid ARIA roles:
+"alert" | "alertdialog" | "application" | "article" | "banner" | "blockquote" | "button" | "caption" | "cell" | "checkbox" | "code" | "columnheader" | "combobox" | "complementary" | "contentinfo" | "definition" | "deletion" | "dialog" | "directory" | "document" | "emphasis" | "feed" | "figure" | "form" | "generic" | "grid" | "gridcell" | "group" | "heading" | "img" | "insertion" | "link" | "list" | "listbox" | "listitem" | "log" | "main" | "marquee" | "math" | "meter" | "menu" | "menubar" | "menuitem" | "menuitemcheckbox" | "menuitemradio" | "navigation" | "none" | "note" | "option" | "paragraph" | "presentation" | "progressbar" | "radio" | "radiogroup" | "region" | "row" | "rowgroup" | "rowheader" | "scrollbar" | "search" | "searchbox" | "separator" | "slider" | "spinbutton" | "status" | "strong" | "subscript" | "superscript" | "switch" | "tab" | "table" | "tablist" | "tabpanel" | "term" | "textbox" | "time" | "timer" | "toolbar" | "tooltip" | "tree" | "treegrid" | "treeitem"
+
+3. When locating form fields, consider using `page.getByLabel()`. For example: `await page.getByLabel('Username').fill('test username');`
+
+4. Avoid using text locators. For example, never do `page.locator('text=current count')`. This will get your PR auto-rejected.
