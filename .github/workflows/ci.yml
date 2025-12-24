@@ -84,7 +84,7 @@ jobs:
         run: pnpm install --frozen-lockfile
 
       - name: Install Playwright browsers
-        uses: microsoft/playwright-github-action@v1
+        run: pnpm install:playwright
 
       - name: Run browser tests
         run: pnpm test:browser
@@ -111,7 +111,7 @@ jobs:
         run: pnpm install --frozen-lockfile
 
       - name: Install Playwright browsers
-        uses: microsoft/playwright-github-action@v1
+        run: pnpm install:playwright
 
       - name: Build extension
         run: pnpm build
