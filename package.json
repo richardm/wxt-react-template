@@ -11,6 +11,7 @@
     "dev": "wxt",
     "dev:firefox": "wxt -b firefox",
     "postinstall": "wxt prepare",
+    "lint": "eslint . --max-warnings=0",
     "test:unit": "vitest --project unit",
     "test:browser": "vitest --project browser",
     "test:e2e": "playwright test",
