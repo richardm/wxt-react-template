@@ -10,8 +10,10 @@
     "compile": "tsc --noEmit",
     "dev": "wxt",
     "dev:firefox": "wxt -b firefox",
-    "e2e": "playwright test",
     "postinstall": "wxt prepare",
+    "test:unit": "vitest --project unit",
+    "test:browser": "vitest --project browser",
+    "test:e2e": "playwright test",
     "zip": "wxt zip",
     "zip:firefox": "wxt zip -b firefox"
   },
@@ -21,12 +23,23 @@
   },
   "devDependencies": {
     "@playwright/test": "^1.57.0",
+    "@testing-library/jest-dom": "^6.9.1",
+    "@testing-library/react": "^16.3.1",
     "@types/react": "^19.2.7",
     "@types/react-dom": "^19.2.3",
+    "@vitest/browser-playwright": "^4.0.16",
+    "@vitest/browser-preview": "^4.0.16",
+    "@vitest/eslint-plugin": "^1.6.4",
     "@wxt-dev/module-react": "^1.1.5",
+    "eslint": "^9.39.2",
+    "eslint-plugin-jest-dom": "^5.5.0",
+    "jsdom": "^27.3.0",
     "playwright": "^1.57.0",
     "typescript": "^5.9.3",
+    "unplugin-auto-import": "^20.3.0",
+    "vite-tsconfig-paths": "^6.0.3",
     "vitest": "^4.0.16",
+    "vitest-browser-react": "^2.0.2",
     "wxt": "^0.20.6"
   }
 }

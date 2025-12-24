@@ -7,6 +7,7 @@ export async function openPopup(page: Page, extensionId: string) {
   await page.getByTestId('counter');
 
   const popup = {
+    getPageTitle: () => page.getByTestId('page-title'),
     getIncrementCounterButton: () => page.getByRole('button', { name: 'Increment counter' }),
     getCounterText: () => page.getByTestId('counter-text'),
     clickCounter: async () => {
