@@ -1,12 +1,17 @@
 import { test as base, chromium, type BrowserContext } from '@playwright/test';
 import path from 'path';
+import config from '../wxt.config.ts';
 
-const pathToExtension = path.resolve('.output/chrome-mv3');
+console.log('wxt.config.ts', config);
 
-export const test = base.extend<{
+const pathToExtension = path.resolve(config.outDir ?? '.output', 'chrome-mv3');
+
+type ExtensionFixtures = {
   context: BrowserContext;
   extensionId: string;
-}>({
+};
+
+export const test = base.extend<ExtensionFixtures>({
   context: async ({}, use) => {
     const context = await chromium.launchPersistentContext('', {
       headless: false,
