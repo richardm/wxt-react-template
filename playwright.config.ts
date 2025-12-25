@@ -16,8 +16,9 @@ export default defineConfig({
   reporter: 'html',
 
   use: {
-    // Headless by default, but set to false if not running in CI (for local debugging)
-    headless: !!process.env.CI,
+    // These e2e tests load a built browser extension, which requires a headed browser.
+    // In CI, we provide a virtual display via Xvfb (see .github/workflows/ci.yml).
+    headless: false,
 
     // Collect trace when retrying the failed test.
     trace: 'on-first-retry',

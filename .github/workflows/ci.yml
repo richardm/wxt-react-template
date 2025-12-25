@@ -116,5 +116,10 @@ jobs:
       - name: Build extension
         run: pnpm build
 
+      # Our e2e tests load the built extension and require a headed Chromium.
+      # GitHub Actions runners do not provide an X server by default, so we run under Xvfb.
+      - name: Install Xvfb
+        run: sudo apt-get update && sudo apt-get install -y xvfb
+
       - name: Run e2e tests
-        run: pnpm test:e2e
+        run: xvfb-run --auto-servernum --server-args="-screen 0 1280x720x24" pnpm test:e2e
