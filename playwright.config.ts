@@ -16,6 +16,9 @@ export default defineConfig({
   reporter: 'html',
 
   use: {
+    // Headless by default, but set to false if not running in CI (for local debugging)
+    headless: !!process.env.CI,
+
     // Collect trace when retrying the failed test.
     trace: 'on-first-retry',
   },
